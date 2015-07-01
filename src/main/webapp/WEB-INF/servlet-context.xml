@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:tx="http://www.springframework.org/schema/tx"
+             xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+             xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    <annotation-driven />
+    <tx:annotation-driven/>
+    <context:component-scan base-package="mi.khtp.spring3mvcxml" />
+    <!-- View Resolver -->
+    <beans:bean
+        class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <beans:property name="prefix" value="/WEB-INF/views/" />
+        <beans:property name="suffix" value=".jsp" />
+    </beans:bean>
+    <!-- Datasource -->
+    <beans:bean id="datasource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <beans:property name="driverClassName" value="org.h2.Driver" />
+        <beans:property name="url" value="jdbc:h2:mem:sample" />
+        <beans:property name="username" value="SA" />
+        <beans:property name="password" value="" />
+    </beans:bean>
+    <!-- Hibernate sessionfactory -->
+    <beans:bean id="sessionFactory"
+                class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <beans:property name="dataSource" ref="datasource" />
+        <beans:property name="annotatedClasses">
+            <beans:list>                             
+                <beans:value>mi.khtp.spring3mvcxml.Person</beans:value>
+            </beans:list>
+        </beans:property>
+        <beans:property name="hibernateProperties">
+            <beans:props>
+                <beans:prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</beans:prop>
+                <beans:prop key="hibernate.show_sql">false</beans:prop>
+                <beans:prop key="hibernate.hbm2ddl.auto">update</beans:prop>
+            </beans:props>
+        </beans:property>
+    </beans:bean>
+    <beans:bean id="transactionManager"
+                class="org.springframework.orm.hibernate4.HibernateTransactionManager"
+                p:sessionFactory-ref="sessionFactory">
+    </beans:bean>
+</beans:beans>
