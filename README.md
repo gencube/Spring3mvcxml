@@ -8,8 +8,8 @@ Build instructions
 -------------------
 
 ```
-git clone https://github.com/gencube/resteasysample.git
-cd resteasysample
+git clone https://github.com/gencube/Spring3mvcxml.git
+cd Spring3mvcxml
 mvn clean package
 ```
 
@@ -43,7 +43,7 @@ mvn
 Test the Service
 -----------------
 ```
-curl http://localhost:8080/Spring3mvcxml/api/persons/init
+$ **curl http://localhost:8080/Spring3mvcxml/api/persons/init**
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
@@ -54,7 +54,7 @@ curl http://localhost:8080/Spring3mvcxml/api/persons/init
         <H2>initialized Persons</H2>
     </body>
 </html>
-curl http://localhost:8080/Spring3mvcxml/api/persons
+$ **curl http://localhost:8080/Spring3mvcxml/api/persons**
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
